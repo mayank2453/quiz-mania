@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Mania - Test Your Knowledge</title>
+    <!-- CSS File -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Category Selection Screen -->
+        <div id="categoryScreen" class="screen active">
+            <div class="quiz-container">
+                <!-- Welcome Header with Logo -->
+                <div class="quiz-header">
+                    <div class="quiz-logo">
+                        <span class="logo-quiz">QUIZ</span><span class="logo-mania">Mania</span>
+                    </div>
+                </div>
+                
+                <div class="welcome-container">
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">Welcome to <span class="title-quiz">QUIZ</span><span class="title-mania">Mania</span></h1>
+                        <p class="welcome-subtitle">Please read all the rules about this quiz before you start.</p>
+                        <a href="#" id="quizRulesLink" class="quiz-rules-link">Quiz rules</a>
+                    </div>
+                    
+                    <div class="user-info-section">
+                        <label class="input-label">Full name</label>
+                        <input type="text" id="fullNameInput" class="name-input" placeholder="Full name">
+                    </div>
+                    
+                    <div class="topic-selection-section">
+                        <p class="topic-instruction">Please select topic to continue</p>
+                        <div class="topics-grid">
+                            <button class="topic-button" data-category="javascript">
+                                <span class="topic-radio"></span>
+                                <span class="topic-text">Javascript Basic</span>
+                            </button>
+                            <button class="topic-button" data-category="angular">
+                                <span class="topic-radio"></span>
+                                <span class="topic-text">Angular Basic</span>
+                            </button>
+                            <button class="topic-button" data-category="react">
+                                <span class="topic-radio"></span>
+                                <span class="topic-text">React.js Advance</span>
+                            </button>
+                            <button class="topic-button" data-category="flutter">
+                                <span class="topic-radio"></span>
+                                <span class="topic-text">Flutter</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="start-section">
+                        <button id="startQuizButton" class="start-quiz-btn" disabled>Start Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="quiz-container">
+                <!-- Quiz Header with Logo and Exit Button -->
+                <div class="quiz-header">
+                    <div class="quiz-logo">
+                        <span class="logo-quiz">QUIZ</span><span class="logo-mania">Mania</span>
+                    </div>
+                    <button class="exit-quiz-btn" id="exitQuizButton">Exit Quiz</button>
+                </div>
+
+                <!-- Progress and Timer Section -->
+                <div class="quiz-progress-section">
+                    <div class="quiz-progress-top">
+                        <div class="quiz-question-info">
+                            <span class="question-number" id="questionNumber">1</span>
+                            <span class="question-total">/<span id="totalQuestionsDisplay">10</span></span> 
+                        </div>
+                        <div class="quiz-timer-display" id="timerDisplay">0:10</div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <!-- Question Section -->
+                <div class="question-section">
+                    <h2 class="question-text" id="questionText">Loading question...</h2>
+                </div>
+
+                <!-- Answers Container -->
+                <div class="answers-container" id="answersContainer">
+                    <!-- Answer options will be dynamically inserted -->
+                </div>
+
+                <!-- Quiz Controls -->
+                <div class="quiz-controls">
+                    <button id="nextButton" class="btn btn-primary" disabled>
+                        Next
+                    </button>
+                    <span class="skip-question" id="skipQuestion">Skip this question</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="quiz-container">
+                <!-- Results Header with Logo and User -->
+                <div class="quiz-header">
+                    <div class="quiz-logo">
+                        <span class="logo-quiz">QUIZ</span><span class="logo-mania">Mania</span>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-avatar">R</div>
+                        <span class="user-name" id="userName">Richard Joe Freds</span>
+                    </div>
+                </div>
+
+                <div class="results-container">
+                    <div class="results-header">
+                        <div class="results-icon">✓</div>
+                        <h1 class="results-title">CONGRATULATION</h1>
+                        <p class="results-subtitle">You successfully completed the Quiz and holds</p>
+                    </div>
+
+                    <div class="score-section">
+                        <div class="score-label">Your Score</div>
+                        <div class="score-percentage" id="scorePercentage">0%</div>
+                        <div class="performance-message" id="performanceMessage">Great job!</div>
+                    </div>
+
+                    <div class="score-summary">
+                        <p class="summary-text">Out of <span id="totalQuestions">10</span> question</p>
+                    </div>
+
+                    <div class="results-breakdown">
+                        <span class="breakdown-item">
+                            <span class="breakdown-value" id="correctAnswers">0</span> Correct
+                        </span>
+                        <span class="breakdown-item">
+                            <span class="breakdown-value" id="incorrectAnswers">0</span> Incorrect
+                        </span>
+                        <span class="breakdown-item">
+                            <span class="breakdown-value" id="unansweredQuestions">0</span> Not answered
+                        </span>
+                    </div>
+
+                    <div class="results-actions">
+                        <button id="playAgainButton" class="btn btn-retake">
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Rules Modal -->
+        <div id="quizRulesModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Quiz rules</h2>
+                    <button class="modal-close" id="closeRulesModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="rule-section">
+                        <h3 class="rule-title">10-Second Timer</h3>
+                        <ul class="rule-list">
+                            <li>Each question comes with a 10-second timer.</li>
+                            <li>If you don't answer within the time limit, the app will automatically move to the next question.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-section">
+                        <h3 class="rule-title">Manual Navigation</h3>
+                        <ul class="rule-list">
+                            <li>You can navigate to the next question manually before the timer expires.</li>
+                            <li>Use the "Next" button to move ahead if you're ready before the timer runs out.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-section">
+                        <h3 class="rule-title">Final Score and Performance Message</h3>
+                        <ul class="rule-list">
+                            <li>After all questions are answered, your final score will be displayed.</li>
+                            <li>Based on your performance, you will receive a personalized message:</li>
+                            <li class="sub-rule">Great job! If you score <strong>above 80%</strong>.</li>
+                            <li class="sub-rule">Well done! If you score <strong>between 60% and 80%</strong>.</li>
+                            <li class="sub-rule">Keep practicing! If you score <strong>below 60%</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
